@@ -1,4 +1,4 @@
-﻿using CommsLIBLite.Communications.FrameWrappers;
+﻿using CommsLIB.Communications.FrameWrappers;
 
 namespace BaseCamLIB.Protocol.BaseCam
 {

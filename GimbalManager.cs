@@ -1,5 +1,5 @@
 ﻿using BaseCamLIB.GimbalState;
-using CommsLIBLite.Base;
+using CommsLIB.Base;
 
 namespace GimbalControlLIB
 {

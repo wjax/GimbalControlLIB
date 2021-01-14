@@ -3,8 +3,8 @@ using BaseCamLIB.Protocol.BaseCam;
 using BaseCamLIB.Protocol.BaseCam.CMDS;
 using BaseCamLIB.Protocol.BaseCam.CMDS.IN;
 using BaseCamLIB.Protocol.BaseCam.CMDS.OUT;
-using CommsLIBLite.Base;
-using CommsLIBLite.Communications;
+using CommsLIB.Base;
+using CommsLIB.Communications;
 using System.Text;
 
 namespace GimbalControlLIB

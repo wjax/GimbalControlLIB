@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.2.0</Version>
+    <TargetFrameworks>netstandard2.1;netstandard2.0</TargetFrameworks>
+    <Version>1.3.0</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="wjax.comms.commsliblite" Version="1.4.1" />
+    <PackageReference Include="CommsLIB" Version="2.4.1" />
   </ItemGroup>
 
 </Project>
