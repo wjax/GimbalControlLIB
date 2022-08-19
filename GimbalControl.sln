@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GimbalControlLIB", "GimbalControlLIB.csproj", "{B1922779-0239-4955-82D4-C7CCFE676B0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GimbalControlLIB", "GimbalControlLIB/GimbalControlLIB.csproj", "{B1922779-0239-4955-82D4-C7CCFE676B0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GimbalControlTester", "GimbalControlTester\GimbalControlTester.csproj", "{A8E856BD-C3F1-464E-9134-7A2FA2E8CB20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{B1922779-0239-4955-82D4-C7CCFE676B0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1922779-0239-4955-82D4-C7CCFE676B0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1922779-0239-4955-82D4-C7CCFE676B0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8E856BD-C3F1-464E-9134-7A2FA2E8CB20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8E856BD-C3F1-464E-9134-7A2FA2E8CB20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8E856BD-C3F1-464E-9134-7A2FA2E8CB20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8E856BD-C3F1-464E-9134-7A2FA2E8CB20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
