@@ -7,6 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GimbalControlLIB", "GimbalC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GimbalControlTester", "GimbalControlTester\GimbalControlTester.csproj", "{A8E856BD-C3F1-464E-9134-7A2FA2E8CB20}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GimbalControlTesterConsole", "GimbalControlTesterConsole\GimbalControlTesterConsole.csproj", "{BCEE90E7-916D-499C-964F-6EDD2D4B9F86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GimbalControlTesterAvalonia", "GimbalControlTesterAvalonia\GimbalControlTesterAvalonia.csproj", "{622ECCB9-7743-4BA9-B67E-8A254B94F821}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommsLIB", "..\..\COMMS\CommsLIB\CommsLIB.csproj", "{702F493F-37F0-4053-8D73-C99C4F5D5CEC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +27,18 @@ Global
 		{A8E856BD-C3F1-464E-9134-7A2FA2E8CB20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8E856BD-C3F1-464E-9134-7A2FA2E8CB20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8E856BD-C3F1-464E-9134-7A2FA2E8CB20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCEE90E7-916D-499C-964F-6EDD2D4B9F86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCEE90E7-916D-499C-964F-6EDD2D4B9F86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCEE90E7-916D-499C-964F-6EDD2D4B9F86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCEE90E7-916D-499C-964F-6EDD2D4B9F86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{622ECCB9-7743-4BA9-B67E-8A254B94F821}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{622ECCB9-7743-4BA9-B67E-8A254B94F821}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{622ECCB9-7743-4BA9-B67E-8A254B94F821}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{622ECCB9-7743-4BA9-B67E-8A254B94F821}.Release|Any CPU.Build.0 = Release|Any CPU
+		{702F493F-37F0-4053-8D73-C99C4F5D5CEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{702F493F-37F0-4053-8D73-C99C4F5D5CEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{702F493F-37F0-4053-8D73-C99C4F5D5CEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{702F493F-37F0-4053-8D73-C99C4F5D5CEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

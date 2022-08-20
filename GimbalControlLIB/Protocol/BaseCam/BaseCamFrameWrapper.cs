@@ -112,5 +112,11 @@ namespace BaseCamLIB.Protocol.BaseCam
            
         }
 
+        public override byte[] Data2BytesSync(BaseCamPacket data, out int count)
+        {
+            byte[] buffer = data.getNetworkBytes(true, out count);
+
+            return buffer;
+        }
     }
 }

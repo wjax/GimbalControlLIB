@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ObjectPool.Native;
 
 namespace BaseCamLIB.Protocol.BaseCam.CMDS.OUT
 {
     public class CMDMotorsOFF : CMDBase
     {
-        public CMDMotorsOFF()
+        public static CMDMotorsOFF Get() => NativePool<CMDMotorsOFF>.Get();
+        
+        public CMDMotorsOFF() : base()
         {
             id = (byte)CMD_ID.CMD_MOTORS_OFF;
         }
@@ -19,5 +22,20 @@ namespace BaseCamLIB.Protocol.BaseCam.CMDS.OUT
         }
 
         public MODE mode;
+
+        public override BaseCamPacket Pack()
+        {
+            var packet = BaseCamPacket.Get((byte)CMD_ID.CMD_MOTORS_OFF);
+            packet.writeByte((byte)mode);
+
+            return packet;
+        }
+
+        public override void Reset()
+        {
+            id = (byte) CMD_ID.UNKNOWN;
+            
+            base.Reset();
+        }
     }
 }

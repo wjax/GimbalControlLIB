@@ -1,21 +1,18 @@
-﻿using CommsLIB.Base;
-using GimbalControlLIB;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Net;
 using System.Runtime.CompilerServices;
-using System.Windows;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Interactivity;
+using CommsLIB.Base;
+using GimbalControlLIB;
+using ReactiveUI;
 
-namespace GimbalControlTester
+namespace GimbalControlTesterAvalonia.Views
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        GimbalManager manager;
-
         #region MVVM
         private Dictionary<string, PropertyChangedEventArgs> _cachedEventArgs = new Dictionary<string, PropertyChangedEventArgs>();
         public event PropertyChangedEventHandler PropertyChanged;
@@ -38,7 +35,9 @@ namespace GimbalControlTester
             return true;
         }
         #endregion
-
+        
+        GimbalManager manager;
+        
         private float _rollENC;
         public float RollENC
         {
@@ -59,8 +58,7 @@ namespace GimbalControlTester
             get => _yawENC;
             set => Set(ref _yawENC, value);
         }
-
-
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -70,29 +68,26 @@ namespace GimbalControlTester
             manager.GimbalDataEvent += OnGimbalData;
             manager.start();
             DataContext = this;
-
-            //manager.RequestRealTimeData(null);
-
-
         }
-
+        
+                
         private void OnGimbalData(BaseCamLIB.GimbalState.GimbalStatus status)
         {
             //Console.WriteLine($"YawENC {status.YawENCAngle} Yaw {status.YawAngle} PitchENC {status.PitchENCAngle}" + DateTime.Now.ToString("HH:mm:ss.fff"));
-            // RollENC = status.RollENCAngle;
-            // PitchENC = status.PitchENCAngle;
-            // YawENC = status.YawENCAngle;
+            RollENC = status.RollENCAngle;
+            PitchENC = status.PitchENCAngle;
+            YawENC = status.YawENCAngle;
 
             // status.RollENCAngle.ToString();
             // status.PitchENCAngle.ToString();
             // status.YawENCAngle.ToString();
             
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                TB_Roll.Text = status.RollENCAngle.ToString();
-                TB_Pitch.Text = status.PitchENCAngle.ToString();
-                TB_Yaw.Text = status.YawENCAngle.ToString();
-            });
+            // Application.Current.(() =>
+            // {
+            //     TB_Roll.Text = status.RollENCAngle.ToString();
+            // TB_Pitch.Text = status.PitchENCAngle.ToString();
+            // TB_Yaw.Text = status.YawENCAngle.ToString();
+            // });
             
         }
 

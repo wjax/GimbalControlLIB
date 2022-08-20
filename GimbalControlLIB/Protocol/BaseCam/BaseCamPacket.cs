@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ObjectPool;
+using ObjectPool.Native;
 
 namespace BaseCamLIB.Protocol.BaseCam
 {
-    public class BaseCamPacket
+    public class BaseCamPacket : IPoolable, IDisposable
     {
         #region defines
         // Size of header and checksums
@@ -48,6 +50,8 @@ namespace BaseCamLIB.Protocol.BaseCam
         {
             data = new byte[SBGC_CMD_MAX_BYTES];
             data[INDEX_SOF] = SBGC_STC_V2;
+            
+            Console.WriteLine("BaseCamPacket created");
         }
 
         public BaseCamPacket(byte _id) : this(_id, SBGC_CMD_MAX_BYTES)
@@ -164,13 +168,15 @@ namespace BaseCamLIB.Protocol.BaseCam
             return Len + SBGC_CMD_NON_PAYLOAD_BYTES;
         }
 
-        public byte[] getNetworkBytes(bool updateChecksums)
+        public byte[] getNetworkBytes(bool updateChecksums, out int length)
         {
             if (updateChecksums)
                 UpdateChecksums();
 
             data[SBGC_CMD_NON_PAYLOAD_BYTES + Len - 2] = (byte)crc;
             data[SBGC_CMD_NON_PAYLOAD_BYTES + Len - 1] = (byte)(crc >> 8);
+            
+            length = getPacketLength();
 
             return data;
         }
@@ -223,5 +229,53 @@ namespace BaseCamLIB.Protocol.BaseCam
             return crc_register;
         }
 
+        #region pooling
+        public static BaseCamPacket Get(byte id)
+        {
+            var packet = NativePool<BaseCamPacket>.Get();
+            packet.init(id);
+
+            return packet;
+        }
+        public void Reset()
+        {
+            reset();
+        }
+
+        public Action ReturnToPool { get; set; }
+        #endregion
+        
+        #region Dispose
+        private bool disposedValue;
+        private void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    ReturnToPool();
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override finalizer
+                // TODO: set large fields to null
+                disposedValue = true;
+            }
+        }
+
+        // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
+        // ~SLAPacket()
+        // {
+        //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        //     Dispose(disposing: false);
+        // }
+
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion
     }
 }

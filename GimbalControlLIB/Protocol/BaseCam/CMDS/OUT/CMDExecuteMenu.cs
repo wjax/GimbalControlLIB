@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ObjectPool.Native;
 
 namespace BaseCamLIB.Protocol.BaseCam.CMDS.OUT
 {
     public class CMDExecuteMenu : CMDBase
     {
+        public static CMDExecuteMenu Get() => NativePool<CMDExecuteMenu>.Get();
+        
         public enum ACTION : byte
         {
             MENU_CMD_NO = 0,
@@ -69,10 +72,25 @@ namespace BaseCamLIB.Protocol.BaseCam.CMDS.OUT
 
         }
         public ACTION Action;
-        public CMDExecuteMenu()
+        public CMDExecuteMenu() : base()
         {
             id = (byte)CMD_ID.CMD_EXECUTE_MENU;
             Action = ACTION.MENU_CMD_HOME_POSITION;
+        }
+
+        public override BaseCamPacket Pack()
+        {
+            var packet = BaseCamPacket.Get((byte) CMD_ID.CMD_EXECUTE_MENU);
+            packet.writeByte((byte)Action);
+
+            return packet;
+        }
+
+        public override void Reset()
+        {
+            id = (byte) CMD_ID.UNKNOWN;
+            
+            base.Reset();
         }
     }
 }

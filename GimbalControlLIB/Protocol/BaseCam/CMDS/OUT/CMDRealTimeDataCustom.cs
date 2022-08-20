@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ObjectPool.Native;
 
 namespace BaseCamLIB.Protocol.BaseCam.CMDS.OUT
 {
     public class CMDRealTimeDataCustom : CMDBase
     {
+        public static CMDRealTimeDataCustom Get() => NativePool<CMDRealTimeDataCustom>.Get();
+        
         public readonly byte[] flags = new byte[4];
         public readonly byte[] reserved = new byte[6];
 
-        public CMDRealTimeDataCustom()
+        public CMDRealTimeDataCustom() : base()
         {
             id = (byte)CMD_ID.CMD_REALTIME_DATA_CUSTOM;
 
@@ -20,6 +23,26 @@ namespace BaseCamLIB.Protocol.BaseCam.CMDS.OUT
 
             for (int i = 0; i < reserved.Length; i++)
                 reserved[i] = 0x00;
+        }
+
+        public override BaseCamPacket Pack()
+        {
+            var packet = BaseCamPacket.Get((byte)CMD_ID.CMD_REALTIME_DATA_CUSTOM);
+
+            for (int i = 0; i < flags.Length; i++)
+                packet.writeByte(flags[i]);
+
+            for (int i = 0; i < reserved.Length; i++)
+                packet.writeByte(reserved[i]);
+
+            return packet;
+        }
+
+        public override void Reset()
+        {
+            id = (byte) CMD_ID.UNKNOWN;
+            
+            base.Reset();
         }
     }
 }

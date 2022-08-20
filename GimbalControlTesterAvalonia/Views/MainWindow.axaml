@@ -1,11 +1,16 @@
-﻿<Window x:Class="GimbalControlTester.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:GimbalControlTesterAvalonia.ViewModels"
+        xmlns:local="using:GimbalControlTesterAvalonia.Views"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GimbalControlTester"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="GimbalControlTesterAvalonia.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="GimbalControlTesterAvalonia"
+        x:DataType="local:MainWindow"
+        x:CompileBindings="True">
+
     <StackPanel>
         <Button Content="MotorsOFF" Click="Button_Click_MOTORSOFF"/>
         <Button Content="MotorsON" Click="Button_Click_MOTORSON"/>
@@ -29,11 +34,11 @@
         </StackPanel>
         <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal">
             <TextBlock Text="Roll ENC:" Margin="5"/>
-            <TextBlock x:Name="TB_Roll" MinWidth="100" VerticalAlignment="Center"/>
-            <TextBlock Text="Pitch:" Margin="5"/>
-            <TextBlock x:Name="TB_Pitch" MinWidth="100" VerticalAlignment="Center"/>
-            <TextBlock Text="Yaw:" Margin="5"/>
-            <TextBlock x:Name="TB_Yaw" MinWidth="100" VerticalAlignment="Center"/>
+            <TextBlock x:Name="TB_Roll" Text="{Binding RollENC}" MinWidth="100" VerticalAlignment="Center"/>
+            <TextBlock Text="Pitch ENC:" Margin="5"/>
+            <TextBlock x:Name="TB_Pitch" Text="{Binding PitchENC}" MinWidth="100" VerticalAlignment="Center"/>
+            <TextBlock Text="Yaw ENC:" Margin="5"/>
+            <TextBlock x:Name="TB_Yaw" Text="{Binding YawENC}" MinWidth="100" VerticalAlignment="Center"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Button Content="Set ZOOM" Click="Button_Click_ZOOM"/>
@@ -41,4 +46,5 @@
             <TextBox x:Name="TB_ZOOM" MinWidth="100" VerticalAlignment="Center"/>
         </StackPanel>
     </StackPanel>
+
 </Window>

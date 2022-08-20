@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ObjectPool.Native;
 
 namespace BaseCamLIB.Protocol.BaseCam.CMDS.OUT
 {
     public class CMDDataStreamInterval : CMDBase
     {
+        public static CMDDataStreamInterval Get() => NativePool<CMDDataStreamInterval>.Get();
+        
         public enum CMD_ID_REQUESTED : byte
         {
             CMD_REALTIME_DATA_3 = 23,
@@ -20,7 +23,7 @@ namespace BaseCamLIB.Protocol.BaseCam.CMDS.OUT
         public readonly byte[] flags = new byte[8];
         public readonly byte[] reserved = new byte[10];
 
-        public CMDDataStreamInterval()
+        public CMDDataStreamInterval() : base()
         {
             id = (byte)CMD_ID.CMD_DATA_STREAM_INTERVAL;
             // set flags for DATA CUSTOM
@@ -28,5 +31,25 @@ namespace BaseCamLIB.Protocol.BaseCam.CMDS.OUT
             flags[1] = 0x08;
         }
 
+        public override BaseCamPacket Pack()
+        {
+            var packet = BaseCamPacket.Get((byte)CMD_ID.CMD_DATA_STREAM_INTERVAL);
+            packet.writeByte((byte)CMD_ID_Req);
+            packet.writeWord(IntervalMS);
+            for (int i = 0; i < flags.Length; i++)
+                packet.writeByte(flags[i]);
+
+            for (int i = 0; i < reserved.Length; i++)
+                packet.writeByte(reserved[i]);
+            
+            return packet;
+        }
+
+        public override void Reset()
+        {
+            id = (byte) CMD_ID.UNKNOWN;
+            
+            base.Reset();
+        }
     }
 }

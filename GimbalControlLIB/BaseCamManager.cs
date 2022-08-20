@@ -37,59 +37,86 @@ namespace GimbalControlLIB
         private void BaseCamFrameWrapper_FrameAvailableEvent(string ID, BaseCamPacket packet)
         {
             CMDBase cmd = BaseCamCMDParsers.UnpackCMD(packet);
+            
+            if (cmd is null)
+                return;
 
-            if (cmd is RESRealTimeDataCustom)
+            switch (cmd)
             {
-                RESRealTimeDataCustom cmdData = cmd as RESRealTimeDataCustom;
-                //textLogger.Clear();
-                //textLogger.Append("CMDRealTimeDataCustom - Size: ").Append(packet.Len)
-                //    .Append(" Roll: ").Append(cmdData.IMUAngles[0])
-                //    .Append(" Pitch: ").Append(-cmdData.IMUAngles[1])
-                //    .Append(" Yaw: ").Append(cmdData.IMUAngles[2])
-                //    //.Append(" RAW STATOR Roll: ").Append(cmdData.StatorAngles[0])
-                //    //.Append(" RAW STATOR Pitch: ").Append(cmdData.StatorAngles[1])
-                //    //.Append(" RAW STATOR Yaw: ").Append(cmdData.StatorAngles[2]);
-                //    //.Append(" RAW ENC Roll: ").Append(cmdData.EncoderRaw[0])
-                //    //.Append(" RAW ENC Pitch: ").Append(-cmdData.EncoderRaw[1])
-                //    .Append(" RAW ENC Yaw: ").Append(cmdData.EncoderRaw[2]);
+                case RESRealTimeDataCustom rtC:
+                    gimbalStatus.RollAngle = rtC.IMUAngles[0];
+                    gimbalStatus.PitchAngle = -1 * rtC.IMUAngles[1];
+                    gimbalStatus.YawAngle = rtC.IMUAngles[2];
+                    gimbalStatus.RollENCAngle = rtC.EncoderRaw[0];
+                    gimbalStatus.PitchENCAngle = pitchDirection * rtC.EncoderRaw[1];
+                    gimbalStatus.YawENCAngle = yawDirection * rtC.EncoderRaw[2];
 
-                //System.Diagnostics.Debug.WriteLine(textLogger.ToString());
-                gimbalStatus.RollAngle = cmdData.IMUAngles[0];
-                gimbalStatus.PitchAngle = -1 * cmdData.IMUAngles[1];
-                gimbalStatus.YawAngle = cmdData.IMUAngles[2];
-                gimbalStatus.RollENCAngle = cmdData.EncoderRaw[0];
-                gimbalStatus.PitchENCAngle = pitchDirection * cmdData.EncoderRaw[1];
-                gimbalStatus.YawENCAngle = yawDirection * cmdData.EncoderRaw[2];
-
-                FireDataEvent(gimbalStatus);
+                    FireDataEvent(gimbalStatus);
+                    break;
+                case RESRealTimeData4 rt4:
+                    break;
             }
-            else if (cmd is RESRealTimeData4)
-            {
-                RESRealTimeData4 cmdData = cmd as RESRealTimeData4;
-                //text.Append("CMDRealTimeData4 - Size: ").Append(packet.Len)
-                //    .Append(" Roll: ").Append(cmdData.IMUAngles[0])
-                //    .Append(" Pitch: ").Append(cmdData.IMUAngles[1])
-                //    .Append(" Yaw: ").Append(cmdData.IMUAngles[2])
-                //    .Append(" RAW STATOR Roll: ").Append(cmdData.StatorAngles[0])
-                //    .Append(" RAW STATOR Pitch: ").Append(cmdData.StatorAngles[1])
-                //    .Append(" RAW STATOR Yaw: ").Append(cmdData.StatorAngles[2])
-                //    .Append(" Frame Roll: ").Append(cmdData.IMUAnglesFrame[0])
-                //    .Append(" Frame Pitch: ").Append(cmdData.IMUAnglesFrame[1])
-                //    .Append(" Frame Yaw: ").Append(cmdData.IMUAnglesFrame[2]);
+            
+            cmd.Dispose();
 
-                //System.Diagnostics.Debug.WriteLine(text.ToString());
-                //FireDataEvent(new GimbalStatus(GIMBAL_MODE.NON_FOLLOW, cmdData.IMUAngles[0], cmdData.IMUAngles[1], cmdData.IMUAngles[2]));
-            }
+            // if (cmd is RESRealTimeDataCustom)
+            // {
+            //     RESRealTimeDataCustom cmdData = cmd as RESRealTimeDataCustom;
+            //     //textLogger.Clear();
+            //     //textLogger.Append("CMDRealTimeDataCustom - Size: ").Append(packet.Len)
+            //     //    .Append(" Roll: ").Append(cmdData.IMUAngles[0])
+            //     //    .Append(" Pitch: ").Append(-cmdData.IMUAngles[1])
+            //     //    .Append(" Yaw: ").Append(cmdData.IMUAngles[2])
+            //     //    //.Append(" RAW STATOR Roll: ").Append(cmdData.StatorAngles[0])
+            //     //    //.Append(" RAW STATOR Pitch: ").Append(cmdData.StatorAngles[1])
+            //     //    //.Append(" RAW STATOR Yaw: ").Append(cmdData.StatorAngles[2]);
+            //     //    //.Append(" RAW ENC Roll: ").Append(cmdData.EncoderRaw[0])
+            //     //    //.Append(" RAW ENC Pitch: ").Append(-cmdData.EncoderRaw[1])
+            //     //    .Append(" RAW ENC Yaw: ").Append(cmdData.EncoderRaw[2]);
+            //
+            //     //System.Diagnostics.Debug.WriteLine(textLogger.ToString());
+            //     gimbalStatus.RollAngle = cmdData.IMUAngles[0];
+            //     gimbalStatus.PitchAngle = -1 * cmdData.IMUAngles[1];
+            //     gimbalStatus.YawAngle = cmdData.IMUAngles[2];
+            //     gimbalStatus.RollENCAngle = cmdData.EncoderRaw[0];
+            //     gimbalStatus.PitchENCAngle = pitchDirection * cmdData.EncoderRaw[1];
+            //     gimbalStatus.YawENCAngle = yawDirection * cmdData.EncoderRaw[2];
+            //
+            //     FireDataEvent(gimbalStatus);
+            // }
+            // else if (cmd is RESRealTimeData4)
+            // {
+            //     RESRealTimeData4 cmdData = cmd as RESRealTimeData4;
+            //     //text.Append("CMDRealTimeData4 - Size: ").Append(packet.Len)
+            //     //    .Append(" Roll: ").Append(cmdData.IMUAngles[0])
+            //     //    .Append(" Pitch: ").Append(cmdData.IMUAngles[1])
+            //     //    .Append(" Yaw: ").Append(cmdData.IMUAngles[2])
+            //     //    .Append(" RAW STATOR Roll: ").Append(cmdData.StatorAngles[0])
+            //     //    .Append(" RAW STATOR Pitch: ").Append(cmdData.StatorAngles[1])
+            //     //    .Append(" RAW STATOR Yaw: ").Append(cmdData.StatorAngles[2])
+            //     //    .Append(" Frame Roll: ").Append(cmdData.IMUAnglesFrame[0])
+            //     //    .Append(" Frame Pitch: ").Append(cmdData.IMUAnglesFrame[1])
+            //     //    .Append(" Frame Yaw: ").Append(cmdData.IMUAnglesFrame[2]);
+            //
+            //     //System.Diagnostics.Debug.WriteLine(text.ToString());
+            //     //FireDataEvent(new GimbalStatus(GIMBAL_MODE.NON_FOLLOW, cmdData.IMUAngles[0], cmdData.IMUAngles[1], cmdData.IMUAngles[2]));
+            // }
         }
 
         private void SendPacket(CMDBase cmd)
         {
-            BaseCamPacket packet = BaseCamCMDParsers.PackCMD(cmd);
+            BaseCamPacket packet = cmd.Pack(); //BaseCamCMDParsers.PackCMD(cmd);
             if (packet != null)
             {
-                byte[] buff = packet.getNetworkBytes(true);
-                baseCamLink.SendASync(buff, buff.Length);
+                //byte[] buff = packet.getNetworkBytes(true);
+                //baseCamLink.SendASync(buff, buff.Length);
+                baseCamLink.SendASync(packet);
+                
+                // Back to pool
+                packet.Dispose();
             }
+            
+            cmd.Dispose();
         }
 
         public override void Move(float[] angles, float[] speeds, MOVEMENT_MODE mode)
@@ -97,7 +124,7 @@ namespace GimbalControlLIB
             // Invert Pitch as Alexmos and us follow different axis
             angles[1] *= -1;
 
-            CMDControl c = new CMDControl();
+            CMDControl c = CMDControl.Get();
             try
             {
                 for (int i = 0; i < c.Modes.Length; i++)
@@ -116,7 +143,7 @@ namespace GimbalControlLIB
 
         public override void MoveDifferential(float[] dangles, float[] speeds)
         {
-            CMDControl c = new CMDControl();
+            CMDControl c = CMDControl.Get();
             try
             {
                 for (int i = 0; i < c.Modes.Length; i++)
@@ -140,28 +167,26 @@ namespace GimbalControlLIB
         {
             CMDBase c;
             if (ON)
-                c = new CMDMotorsON();
+                c = CMDMotorsON.Get();
             else
-                c = new CMDMotorsOFF();
+                c = CMDMotorsOFF.Get();
 
             SendPacket(c);
         }
 
         public override void GoHomePosition()
         {
-            CMDExecuteMenu c = new CMDExecuteMenu
-            {
-                Action = CMDExecuteMenu.ACTION.MENU_CMD_HOME_POSITION
-            };
+            CMDExecuteMenu c = CMDExecuteMenu.Get();
+            c.Action = CMDExecuteMenu.ACTION.MENU_CMD_HOME_POSITION;
+            
             SendPacket(c);
         }
 
         public override void CenterYaw()
         {
-            CMDExecuteMenu c = new CMDExecuteMenu
-            {
-                Action = CMDExecuteMenu.ACTION.MENU_CENTER_YAW_SHORTEST
-            };
+            CMDExecuteMenu c = CMDExecuteMenu.Get();
+            c.Action = CMDExecuteMenu.ACTION.MENU_CENTER_YAW_SHORTEST;
+            
             SendPacket(c);
         }
 
@@ -172,10 +197,9 @@ namespace GimbalControlLIB
 
         private void MenuButtonPress()
         {
-            CMDExecuteMenu c = new CMDExecuteMenu
-            {
-                Action = CMDExecuteMenu.ACTION.MENU_CMD_BUTTON_PRESS
-            };
+            CMDExecuteMenu c = CMDExecuteMenu.Get();
+            c.Action = CMDExecuteMenu.ACTION.MENU_CMD_BUTTON_PRESS;
+            
             SendPacket(c);
         }
 
@@ -185,12 +209,10 @@ namespace GimbalControlLIB
             if (data != null)
                 interval = (data as int?) ?? 100;
 
-            CMDDataStreamInterval c = new CMDDataStreamInterval()
-            {
-                CMD_ID_Req = CMDDataStreamInterval.CMD_ID_REQUESTED.CMD_REALTIME_DATA_CUSTOM,
-                IntervalMS = (ushort)interval
-            };
-           
+            CMDDataStreamInterval c = CMDDataStreamInterval.Get();
+            c.CMD_ID_Req = CMDDataStreamInterval.CMD_ID_REQUESTED.CMD_REALTIME_DATA_CUSTOM;
+            c.IntervalMS = (ushort) interval;
+            
             SendPacket(c);
         }
 
@@ -220,13 +242,11 @@ namespace GimbalControlLIB
 
         public override void SetAPIVirtualChannel(int _channel, short _value)
         {
-            CMDSetVirtualChannel c = new CMDSetVirtualChannel()
-            {
-                channel = _channel,
-                value = _value
-            };
+            CMDSetVirtualChannel c = CMDSetVirtualChannel.Get();
+            c.channel = _channel;
+            c.value = _value;
 
-            System.Diagnostics.Debug.WriteLine($"Value Zoom {_value}");
+            //System.Diagnostics.Debug.WriteLine($"Value Zoom {_value}");
             SendPacket(c);
         }
     }
