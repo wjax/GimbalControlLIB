@@ -1,53 +1,57 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using BaseCamLIB.Protocol.BaseCam.CMDS.IN;
 using ObjectPool.Native;
 
-namespace BaseCamLIB.Protocol.BaseCam.CMDS.OUT
+namespace BaseCamLIB.Protocol.BaseCam.CMDS.OUT;
+
+public class CMDControl : CMDBase
 {
-    public class CMDControl : CMDBase
-    {
-        public static CMDControl Get() => NativePool<CMDControl>.Get();
+    public static CMDControl Get() => NativePool<CMDControl>.Get();
         
-        public enum MODE : byte
-        {
-            NO_CONTROL = 0,
-            SPEED = 1,
-            ANGLE = 2,
-            SPEED_ANGLE = 3,
-            RC = 4,
-            RC_HIGHRES = 6,
-            ANGLE_REL_FRAME = 5
-        }
+    public enum MODE : byte
+    {
+        NO_CONTROL = 0,
+        SPEED = 1,
+        ANGLE = 2,
+        SPEED_ANGLE = 3,
+        RC = 4,
+        RC_HIGHRES = 6,
+        ANGLE_REL_FRAME = 5
+    }
 
-        public MODE[] Modes = new MODE[3];
-        public float[] Speeds = new float[3];
-        public float[] Angles = new float[3];
+    public MODE[] Modes = new MODE[3];
+    public float[] Speeds = new float[3];
+    public float[] Angles = new float[3];
 
-        public CMDControl() : base()
-        {
-            id = (byte)CMD_ID.CMD_CONTROL;
-        }
+    public CMDControl() : base()
+    {
+        id = (byte)CMD_ID.CMD_CONTROL;
+    }
 
-        public override BaseCamPacket Pack()
+    public override BaseCamPacket Pack()
+    {
+        var packet = BaseCamPacket.Get((byte) CMD_ID.CMD_CONTROL);
+        for (int i = 0; i < 3; i++)
         {
-            var packet = BaseCamPacket.Get((byte) CMD_ID.CMD_CONTROL);
-            foreach (byte b in Modes)
-                packet.writeByte(b);
-            for (int i = 0; i < 3; i++)
+            byte b = (byte)Modes[i];
+            // Precion mode
+            if (Modes[i] == MODE.SPEED && Math.Abs(Speeds[i]) < CMDBase.degSegCtrl)
             {
-                packet.writeWord(CMDBase.SpeedCtrl2Units(Speeds[i]));
-                packet.writeWord(CMDBase.Angle2Units(Angles[i]));
+                b = (byte)(b | 0b1000_0000);
             }
-            return packet;
+            packet.writeByte(b);
         }
-
-        public override void Reset()
+        for (int i = 0; i < 3; i++)
         {
-            id = (byte) CMD_ID.UNKNOWN;
-            
-            base.Reset();
+            packet.writeWord(CMDBase.SpeedCtrl2Units(Speeds[i]));
+            packet.writeWord(CMDBase.Angle2Units(Angles[i]));
         }
+        return packet;
+    }
+
+    public override void Reset()
+    {
+        id = (byte) CMD_ID.UNKNOWN;
+            
+        base.Reset();
     }
 }

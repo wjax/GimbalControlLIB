@@ -99,12 +99,12 @@ public enum CMD_ID : byte
 
 public abstract class CMDBase : IPoolable, IDisposable
 {
-    private const float degUnit = 0.02197265625f;
-    private const float degENCUnit = 0.000021457672119140625f;
-    private const float degSegUnit = 0.06103701895f;
+    public const float degUnit = 0.02197265625f;
+    public const float degENCUnit = 0.000021457672119140625f;
+    public const float degSegUnit = 0.06103701895f;
 
-    private const float degSegCtrl = 0.1220740379f;
-
+    public const float degSegCtrl = 0.1220740379f;
+    public const float degSegPrecisionCtrl = 0.001f;
     public byte id;
 
     public CMDBase()
@@ -135,8 +135,10 @@ public abstract class CMDBase : IPoolable, IDisposable
 
     public static short SpeedCtrl2Units(float speed)
     {
-        short n = (short) (speed / degSegCtrl);
-        return n;
+        if (Math.Abs(speed) < degSegCtrl)
+            return (short) (speed / degSegPrecisionCtrl);
+        else
+            return (short)(speed / degSegCtrl);
     }
 
     public static short Angle2Units(float angle)

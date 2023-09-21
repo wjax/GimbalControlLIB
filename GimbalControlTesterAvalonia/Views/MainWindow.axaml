@@ -8,14 +8,18 @@
         x:Class="GimbalControlTesterAvalonia.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="GimbalControlTesterAvalonia"
-        x:DataType="local:MainWindow"
+        x:DataType="vm:MainWindowViewModel"
         x:CompileBindings="True">
+    
+    <Window.DataContext>
+        <vm:MainWindowViewModel></vm:MainWindowViewModel>
+    </Window.DataContext>
 
     <StackPanel>
-        <Button Content="MotorsOFF" Click="Button_Click_MOTORSOFF"/>
-        <Button Content="MotorsON" Click="Button_Click_MOTORSON"/>
-        <Button Content="HomePosition" Click="Button_Click_HOME"/>
-        <Button Content="DataStreamInterval" Click="Button_Click_DATASTREAM"/>
+        <Button Content="MotorsOFF"/>
+        <Button Content="MotorsON"/>
+        <Button Content="HomePosition"/>
+        <Button Content="DataStreamInterval"/>
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="GOTO" Margin="5"/>
             <TextBlock Text="Roll:" Margin="5"/>
@@ -30,7 +34,7 @@
             <TextBox x:Name="TB_SpeedP" MinWidth="50"/>
             <TextBlock Text="Yaw Speed:" Margin="5"/>
             <TextBox x:Name="TB_SpeedY" MinWidth="50"/>
-            <Button Content="APPLY" Margin="20,0,0,0" Click="Button_Click_CONTROL"/>
+            <Button Content="APPLY" Margin="20,0,0,0"/>
         </StackPanel>
         <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal">
             <TextBlock Text="Roll ENC:" Margin="5"/>
@@ -41,7 +45,7 @@
             <TextBlock x:Name="TB_Yaw" Text="{Binding YawENC}" MinWidth="100" VerticalAlignment="Center"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <Button Content="Set ZOOM" Click="Button_Click_ZOOM"/>
+            <Button Content="Set ZOOM"/>
             <TextBlock Text="Zoom:" Margin="5"/>
             <TextBox x:Name="TB_ZOOM" MinWidth="100" VerticalAlignment="Center"/>
         </StackPanel>

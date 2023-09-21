@@ -3,7 +3,6 @@ using GimbalControlLIB;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Net;
 using System.Runtime.CompilerServices;
 using System.Windows;
 
@@ -98,8 +97,8 @@ namespace GimbalControlTester
 
         private void OnGimbalConnection(bool connected)
         {
-            // if (connected)
-            //     manager.RequestRealTimeData(50);
+            if (connected)
+                manager.RequestRealTimeData(50);
         }
 
         private void Button_Click_MOTORSOFF(object sender, RoutedEventArgs e)
@@ -140,7 +139,7 @@ namespace GimbalControlTester
                 float speedP = float.Parse(TB_SpeedP.Text);
                 float speedY = float.Parse(TB_SpeedY.Text);
 
-                manager.Move(new float[3] { angleR, angleP, angleY }, new float[3] { speedR, speedP, speedY }, MOVEMENT_MODE.ANGLE);
+                manager.Move(new float[3] { angleR, angleP, angleY }, new float[3] { speedR, speedP, speedY }, MOVEMENT_MODE.SPEED);
             }
             finally { }
         }

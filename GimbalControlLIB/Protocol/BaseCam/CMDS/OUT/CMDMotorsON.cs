@@ -1,31 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ObjectPool.Native;
+﻿using ObjectPool.Native;
 
-namespace BaseCamLIB.Protocol.BaseCam.CMDS.OUT
+namespace BaseCamLIB.Protocol.BaseCam.CMDS.OUT;
+
+public class CMDMotorsON : CMDBase
 {
-    public class CMDMotorsON : CMDBase
-    {
-        public static CMDMotorsON Get() => NativePool<CMDMotorsON>.Get();
+    public static CMDMotorsON Get() => NativePool<CMDMotorsON>.Get();
         
-        public CMDMotorsON() : base()
-        {
-            id = (byte)CMD_ID.CMD_MOTORS_ON;
-        }
+    public CMDMotorsON() : base()
+    {
+        id = (byte)CMD_ID.CMD_MOTORS_ON;
+    }
 
-        public override BaseCamPacket Pack()
-        {
-            var packet = BaseCamPacket.Get((byte)CMD_ID.CMD_MOTORS_ON);
+    public override BaseCamPacket Pack()
+    {
+        var packet = BaseCamPacket.Get((byte)CMD_ID.CMD_MOTORS_ON);
 
-            return packet;
-        }
+        return packet;
+    }
 
-        public override void Reset()
-        {
-            id = (byte) CMD_ID.UNKNOWN;
+    public override void Reset()
+    {
+        id = (byte) CMD_ID.UNKNOWN;
             
-            base.Reset();
-        }
+        base.Reset();
     }
 }

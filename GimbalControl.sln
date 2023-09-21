@@ -1,17 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30717.126
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GimbalControlLIB", "GimbalControlLIB/GimbalControlLIB.csproj", "{B1922779-0239-4955-82D4-C7CCFE676B0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GimbalControlLIB", "GimbalControlLIB\GimbalControlLIB.csproj", "{B1922779-0239-4955-82D4-C7CCFE676B0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GimbalControlTester", "GimbalControlTester\GimbalControlTester.csproj", "{A8E856BD-C3F1-464E-9134-7A2FA2E8CB20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GimbalControlTester", "GimbalControlTester\GimbalControlTester.csproj", "{A8E856BD-C3F1-464E-9134-7A2FA2E8CB20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GimbalControlTesterConsole", "GimbalControlTesterConsole\GimbalControlTesterConsole.csproj", "{BCEE90E7-916D-499C-964F-6EDD2D4B9F86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GimbalControlTesterConsole", "GimbalControlTesterConsole\GimbalControlTesterConsole.csproj", "{BCEE90E7-916D-499C-964F-6EDD2D4B9F86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GimbalControlTesterAvalonia", "GimbalControlTesterAvalonia\GimbalControlTesterAvalonia.csproj", "{622ECCB9-7743-4BA9-B67E-8A254B94F821}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GimbalControlTesterAvalonia", "GimbalControlTesterAvalonia\GimbalControlTesterAvalonia.csproj", "{622ECCB9-7743-4BA9-B67E-8A254B94F821}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommsLIB", "..\..\COMMS\CommsLIB\CommsLIB.csproj", "{702F493F-37F0-4053-8D73-C99C4F5D5CEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.NETCoreMVVMApp1", "Avalonia.NETCoreMVVMApp1\Avalonia.NETCoreMVVMApp1.csproj", "{B621A514-36A0-4EEA-BA98-FB6CFAB7C85B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.NETCoreApp1", "Avalonia.NETCoreApp1\Avalonia.NETCoreApp1.csproj", "{6467778A-1112-4543-BBBD-725FAC4B0BD3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +37,14 @@ Global
 		{622ECCB9-7743-4BA9-B67E-8A254B94F821}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{622ECCB9-7743-4BA9-B67E-8A254B94F821}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{622ECCB9-7743-4BA9-B67E-8A254B94F821}.Release|Any CPU.Build.0 = Release|Any CPU
-		{702F493F-37F0-4053-8D73-C99C4F5D5CEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{702F493F-37F0-4053-8D73-C99C4F5D5CEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{702F493F-37F0-4053-8D73-C99C4F5D5CEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{702F493F-37F0-4053-8D73-C99C4F5D5CEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B621A514-36A0-4EEA-BA98-FB6CFAB7C85B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B621A514-36A0-4EEA-BA98-FB6CFAB7C85B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B621A514-36A0-4EEA-BA98-FB6CFAB7C85B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B621A514-36A0-4EEA-BA98-FB6CFAB7C85B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6467778A-1112-4543-BBBD-725FAC4B0BD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6467778A-1112-4543-BBBD-725FAC4B0BD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6467778A-1112-4543-BBBD-725FAC4B0BD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6467778A-1112-4543-BBBD-725FAC4B0BD3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

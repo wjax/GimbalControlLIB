@@ -14,17 +14,17 @@
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="GOTO" Margin="5"/>
             <TextBlock Text="Roll:" Margin="5"/>
-            <TextBox x:Name="TB_AngleR" MinWidth="50"/>
+            <TextBox Text="0" VerticalAlignment="Center"  x:Name="TB_AngleR" MinWidth="50"/>
             <TextBlock Text="Pitch:" Margin="5"/>
-            <TextBox x:Name="TB_AngleP" MinWidth="50"/>
+            <TextBox Text="0" VerticalAlignment="Center"  x:Name="TB_AngleP" MinWidth="50"/>
             <TextBlock Text="Yaw:" Margin="5"/>
-            <TextBox x:Name="TB_AngleY" MinWidth="50"/>
+            <TextBox Text="0" VerticalAlignment="Center"  x:Name="TB_AngleY" MinWidth="50"/>
             <TextBlock Text="Roll Speed:" Margin="5"/>
-            <TextBox x:Name="TB_SpeedR" MinWidth="50"/>
+            <TextBox Text="0" VerticalAlignment="Center" x:Name="TB_SpeedR" MinWidth="50"/>
             <TextBlock Text="Pitch Speed:" Margin="5"/>
-            <TextBox x:Name="TB_SpeedP" MinWidth="50"/>
+            <TextBox Text="0" VerticalAlignment="Center" x:Name="TB_SpeedP" MinWidth="50"/>
             <TextBlock Text="Yaw Speed:" Margin="5"/>
-            <TextBox x:Name="TB_SpeedY" MinWidth="50"/>
+            <TextBox Text="0" VerticalAlignment="Center" x:Name="TB_SpeedY" MinWidth="50"/>
             <Button Content="APPLY" Margin="20,0,0,0" Click="Button_Click_CONTROL"/>
         </StackPanel>
         <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal">
